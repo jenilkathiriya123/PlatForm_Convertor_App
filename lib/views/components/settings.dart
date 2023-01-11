@@ -9,6 +9,7 @@ class setting extends StatefulWidget {
 
 class _settingState extends State<setting> {
   DateTime currentDate = DateTime.now();
+  TimeOfDay currentTime = TimeOfDay.now();
 
   List<String> Months = [
     'Jan',
@@ -38,22 +39,36 @@ class _settingState extends State<setting> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("Date"),
               Text(
-                  '${currentDate.day},${Months[currentDate.month - 1]} ${currentDate.year}'),
+                "Date",
+                style: TextStyle(
+                  color: Color(0xff54759e),
+                ),
+              ),
+              Text(
+                '${currentDate.day},${Months[currentDate.month - 1]} ${currentDate.year}',
+                style: TextStyle(
+                  color: Color(0xff54759e),
+                ),
+              ),
             ],
           ),
           SizedBox(height: 5),
           Container(
             width: double.infinity,
             child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.resolveWith(
+                  (states) => Color(0xff54759e),
+                ),
+              ),
               child: Text("Change Date"),
               onPressed: () async {
                 DateTime? pickedDate = await showDatePicker(
                   context: context,
                   initialDate: currentDate,
                   firstDate: DateTime(2010),
-                  lastDate: DateTime(250),
+                  lastDate: DateTime(2050),
                 );
                 setState(() {
                   if (pickedDate != null) {
@@ -70,15 +85,53 @@ class _settingState extends State<setting> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Time"),
-                  Text("9:45:08 AM"),
+                  Text(
+                    "Time",
+                    style: TextStyle(
+                      color: Color(0xff54759e),
+                    ),
+                  ),
+                  (currentTime.period.name == 'pm')
+                      ? Text(
+                          "${currentTime.hour}:${currentTime.minute} ${currentTime.period.name}",
+                          style: TextStyle(
+                            color: Color(0xff54759e),
+                          ),
+                        )
+                      : Text(
+                          "${currentTime.hour}:${currentTime.minute} ${currentTime.period.name}",
+                          style: TextStyle(
+                            color: Color(0xff54759e),
+                          ),
+                        ),
                 ],
               ),
               SizedBox(height: 5),
               Container(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.resolveWith(
+                      (states) => Color(0xff54759e),
+                    ),
+                  ),
+                  onPressed: () async {
+                    TimeOfDay? pickedTime = await showTimePicker(
+                        context: context,
+                        initialTime: currentTime,
+                        builder: (context, widget) {
+                          return MediaQuery(
+                              data: MediaQuery.of(context).copyWith(
+                                alwaysUse24HourFormat: false,
+                              ),
+                              child: widget!);
+                        });
+                    setState(() {
+                      if (pickedTime != null) {
+                        currentTime = pickedTime;
+                      }
+                    });
+                  },
                   child: Text("Change Time"),
                 ),
               ),

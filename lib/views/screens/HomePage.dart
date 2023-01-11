@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage>
   late TabController controller;
   PageController pageController = PageController();
 
-  bool jk = false;
+  bool switchBool = false;
 
   @override
   void initState() {
@@ -32,13 +32,14 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       drawer: drawer(),
       appBar: AppBar(
+        backgroundColor:Color(0xff54759e),
         title: Text("Platform Convertor"),
         actions: [
           Switch(
-            value: jk,
+            value: switchBool,
             onChanged: (val) {
               setState(() {
-                jk = !jk;
+                switchBool = !switchBool;
               });
             },
           ),
@@ -65,7 +66,6 @@ class _HomePageState extends State<HomePage>
           chats(),
           calls(),
           setting(),
-          stepper(),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -81,6 +81,7 @@ class _HomePageState extends State<HomePage>
           });
         },
         child: Icon(Icons.add),
+        backgroundColor:Color(0xff54759e),
       ),
     );
   }
