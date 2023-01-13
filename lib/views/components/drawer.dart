@@ -11,6 +11,7 @@ class _drawerState extends State<drawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -18,12 +19,12 @@ class _drawerState extends State<drawer> {
             flex: 3,
             child: Container(
               width: MediaQuery.of(context).size.width,
-              color: Color(0xff54759e),
-              padding: EdgeInsets.only(left: 20, top: 30),
+              color: const Color(0xff54759e),
+              padding: const EdgeInsets.only(left: 20, top: 30),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 50,
@@ -48,13 +49,13 @@ class _drawerState extends State<drawer> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.people_alt_outlined),
                       SizedBox(width: 30),
                       Text("New Group"),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     children: [
                       Icon(Icons.person),
@@ -64,23 +65,23 @@ class _drawerState extends State<drawer> {
                   ),
                   SizedBox(height: 20),
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.call),
                       SizedBox(width: 30),
                       Text("Calls"),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.bookmark),
                       SizedBox(width: 30),
                       Text("Saved Messages"),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
-                    children: [
+                    children: const [
                       Icon(Icons.settings),
                       SizedBox(width: 30),
                       Text("Settings"),

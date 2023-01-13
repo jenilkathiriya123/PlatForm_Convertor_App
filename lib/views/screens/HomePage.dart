@@ -6,7 +6,6 @@ import '../components/drawer.dart';
 import '../components/settings.dart';
 import '../components/stepper.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -32,8 +31,8 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       drawer: drawer(),
       appBar: AppBar(
-        backgroundColor:Color(0xff54759e),
-        title: Text("Platform Convertor"),
+        backgroundColor: const Color(0xff54759e),
+        title: const Text("Platform Convertor",style:TextStyle(color:Colors.white),),
         actions: [
           Switch(
             value: switchBool,
@@ -45,12 +44,13 @@ class _HomePageState extends State<HomePage>
           ),
         ],
         bottom: TabBar(
+          indicatorColor: Colors.white,
           controller: controller,
           onTap: (val) {
             pageController.animateToPage(val,
                 duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
           },
-          tabs: [
+          tabs: const [
             Tab(text: "CHATS"),
             Tab(text: "CALLS"),
             Tab(text: "SETTINGS"),
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage>
         onPageChanged: (val) {
           controller.animateTo(val);
         },
-        children: [
+        children: const [
           chats(),
           calls(),
           setting(),
@@ -80,8 +80,8 @@ class _HomePageState extends State<HomePage>
             );
           });
         },
-        child: Icon(Icons.add),
-        backgroundColor:Color(0xff54759e),
+        backgroundColor: const Color(0xff54759e),
+        child: const Icon(Icons.add),
       ),
     );
   }

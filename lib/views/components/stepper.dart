@@ -66,15 +66,29 @@ class _stepperState extends State<stepper> {
         currentStep: initialStep,
         onStepContinue: () {
           setState(() {
-            if (initialStep < 2) {
+            if (initialStep == 3) {
+              Map<String, dynamic> myd = {
+                'image': file,
+                'name': Global.name,
+                'desc': Global.description,
+                'time': 'Now',
+                'number': Global.contact,
+              };
+              Global.details.addAll([myd]);
+              print(myd);
+              Navigator.of(context).pop();
+            }
+            else if (initialStep < 3) {
               ++initialStep;
             }
           });
         },
         onStepCancel: () {
-          if (initialStep == 0) {
-            initialStep = 0;
-          }
+          setState(() {
+            if (initialStep > 0) {
+              --initialStep;
+            }
+          });
         },
         onStepTapped: (val) {
           setState(() {
@@ -151,17 +165,10 @@ class _stepperState extends State<stepper> {
               style: TextStyle(color: Colors.grey),
             ),
             content: TextFormField(
-              onSaved: (val) {
+              onChanged: (val) {
                 setState(() {
-                  Global.name = val!;
+                  Global.name = val;
                 });
-              },
-              validator: (val) {
-                if (val!.isEmpty) {
-                  return "Enter your Name";
-                } else {
-                  return null;
-                }
               },
             ),
           ),
@@ -177,10 +184,37 @@ class _stepperState extends State<stepper> {
               style: TextStyle(color: Colors.grey),
             ),
             content: TextFormField(
-              onSaved: (val) {
+              onChanged: (val) {
                 setState(() {
-                  Global.description = val!;
+                  Global.description = val;
                 });
+              },
+            ),
+          ),
+          Step(
+            isActive: (initialStep >= 3) ? true : false,
+            state: StepState.indexed,
+            title: const Text(
+              "Contact",
+              style: TextStyle(color: Colors.black),
+            ),
+            subtitle: const Text(
+              "Enter Contact",
+              style: TextStyle(color: Colors.grey),
+            ),
+            content: TextFormField(
+              keyboardType: TextInputType.number,
+              onChanged: (val) {
+                setState(() {
+                  Global.contact = val;
+                });
+              },
+              validator: (val) {
+                if (val!.isEmpty) {
+                  return "Enter your Name";
+                } else {
+                  return null;
+                }
               },
             ),
           ),

@@ -65,11 +65,28 @@ class _settingState extends State<setting> {
               child: Text("Change Date"),
               onPressed: () async {
                 DateTime? pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: currentDate,
-                  firstDate: DateTime(2010),
-                  lastDate: DateTime(2050),
-                );
+                    context: context,
+                    initialDate: currentDate,
+                    firstDate: DateTime(2010),
+                    errorFormatText: "Error",
+                    lastDate: DateTime(2050),
+                    builder: (context, widget) {
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                          colorScheme: const ColorScheme.light(
+                            primary: Color(0xff54759e),
+                            onPrimary: Colors.white,
+                            onSurface: Colors.black,
+                          ),
+                        ),
+                        child: MediaQuery(
+                            data: MediaQuery.of(context).copyWith(
+                              boldText: true,
+                              invertColors: true,
+                            ),
+                            child: widget!),
+                      );
+                    });
                 setState(() {
                   if (pickedDate != null) {
                     currentDate = pickedDate;
@@ -94,13 +111,13 @@ class _settingState extends State<setting> {
                   (currentTime.period.name == 'pm')
                       ? Text(
                           "${currentTime.hour}:${currentTime.minute} ${currentTime.period.name}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff54759e),
                           ),
                         )
                       : Text(
                           "${currentTime.hour}:${currentTime.minute} ${currentTime.period.name}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color(0xff54759e),
                           ),
                         ),
@@ -120,11 +137,22 @@ class _settingState extends State<setting> {
                         context: context,
                         initialTime: currentTime,
                         builder: (context, widget) {
-                          return MediaQuery(
-                              data: MediaQuery.of(context).copyWith(
-                                alwaysUse24HourFormat: false,
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                              colorScheme: const ColorScheme.light(
+                                primary: Color(0xff54759e),
+                                onPrimary: Colors.white,
+                                onSurface: Colors.black,
                               ),
-                              child: widget!);
+                            ),
+                            child: MediaQuery(
+                                data: MediaQuery.of(context).copyWith(
+                                  alwaysUse24HourFormat: false,
+                                  boldText: true,
+                                  invertColors: true,
+                                ),
+                                child: widget!),
+                          );
                         });
                     setState(() {
                       if (pickedTime != null) {
@@ -132,7 +160,7 @@ class _settingState extends State<setting> {
                       }
                     });
                   },
-                  child: Text("Change Time"),
+                  child: const Text("Change Time"),
                 ),
               ),
             ],
